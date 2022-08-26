@@ -1,0 +1,19 @@
+Package: rfasta
+Type: Package
+Title: A lightweight FASTA sequence parser for R
+Version: 0.8.0
+Authors@R: 
+    person("Jeff", "Jones", , "jeffj@caltech.edu", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-7142-2222"))
+Description: 
+    Utilizes lightweight R packages and regular expressions for parsing FASTA files into R usable formats.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+LazyData: true
+Imports: 
+    cli,
+    readr,
+    rlang,
+    stringr
+RoxygenNote: 7.2.1
