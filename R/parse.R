@@ -48,6 +48,11 @@ parse <- function(fasta_path = NULL,
     names(l_fasta) <- unlist(parallel::mclapply(l_fasta, extract, patterns[1]))
     l_fasta <- parallel::mclapply(l_fasta, extract, patterns)
 
+    if(as == "data.frame") {
+      l_fasta <- parallel::mclapply(l_fasta, as.data.frame)
+      l_fasta <- dplyr::bind_rows(l_fasta)
+    }
+
   }, error = function(err) {
     err = as.character(as.vector(err))
     cli::cli_process_failed()
@@ -55,10 +60,5 @@ parse <- function(fasta_path = NULL,
   })
   cli::cli_process_done()
 
-  if(as == "list") {
-    return(l_fasta)
-  } else {
-    l_fasta <- parallel::mclapply(l_fasta, as.data.frame)
-    return(Reduce(function(x, y) merge(x, y, all=TRUE), l_fasta))
-  }
+  return(l_fasta)
 }
